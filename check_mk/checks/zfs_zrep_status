@@ -13,7 +13,8 @@ zfs_zrep_status_default_levels = {'check_backup': 'check', 'backup_age': (93600,
 def inventory_zfs_zrep_status(info):
     # loop over all output lines of the agent
     for line in info:
-        yield line[0], "zfs_zrep_status_default_levels"
+        yield line[0] + ' Tag: ' + line[4], "zfs_zrep_status_default_levels"
+        #yield line[0], "zfs_zrep_status_default_levels"
 
 # the check function (dummy)
 def check_zfs_zrep_status(item, params, info):
@@ -22,7 +23,7 @@ def check_zfs_zrep_status(item, params, info):
         return 0, 'check disabled by rule'
 
     for line in info:
-        if line[0] == item:
+        if line[0] + ' Tag: ' + line[4] == item:
             synctime = time.strptime(line[3],"%Y/%m/%d-%H:%M:%S")
 
             old = time.time() - time.mktime(synctime)
