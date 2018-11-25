@@ -10,7 +10,7 @@ ZREP_BINARY=zrep
 echo '<<<zfs_zrep_status>>>'
 
 #get all zrep tags
-zrep_tags=( $(zfs get all -t volume | grep dest-fs | awk '{print $2}' | sed s/:dest-fs//gi | sort | uniq) )
+zrep_tags=( $(zfs get all -t filesystem,volume | grep dest-fs | awk '{print $2}' | sed s/:dest-fs//gi | sort | uniq) )
 
 #for each tag output status
 for tag in "${zrep_tags[@]}"; do
