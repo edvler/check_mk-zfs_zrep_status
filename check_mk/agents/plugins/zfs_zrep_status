@@ -2,7 +2,7 @@
 
 # Author: Matthias Maderer
 # E-Mail: edvler@edvler-blog.de
-# URL: https://github.com/edvler/check_mk_proxmox-qemu-backup
+# URL: https://github.com/edvler/check_mk-zfs_zrep_status 
 # License: GPLv2
 
 ZREP_BINARY=zrep

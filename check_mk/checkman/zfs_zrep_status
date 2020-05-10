@@ -7,7 +7,7 @@ description:
  This check runs on distributions which support the ZFS filesystem
  and has the ZREP tool installed.
 
- It querys the status with zrep status and parses the output.
+ It querys the status with -zrep status- and parses the output.
  For each ZREP intialized ZFS dataset is one service created.
 
  The default is that the service gets {critical} if the synchronisation is

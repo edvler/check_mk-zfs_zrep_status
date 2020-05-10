@@ -1,11 +1,11 @@
 # [Check MK](https://mathias-kettner.de/check_mk.html) Plugin to check [ZREP](http://www.bolthole.com/solaris/zrep/) status
 
 # Installation
-First install ZREP as described on ZREP-Website:
-[http://www.bolthole.com/solaris/zrep/]
+First install ZREP as described on ZREP-Website: [http://www.bolthole.com/solaris/zrep/](http://www.bolthole.com/solaris/zrep/)
 
 Then intialize your ZFS dataset with
 ```
+export ZREPTAG=ZREP_01 #Set zrep Tag to make multiple zrep destinations on one volume.
 zrep init ....
 ```
 
@@ -23,7 +23,7 @@ root@monitoring01:/opt/omd# find . -name '*zfs_zrep_status*'
 ./sites/XXXX/local/share/check_mk/web/plugins/wato/check_parameters_zfs_zrep_status.py
 ./sites/XXXX/local/share/check_mk/agents/plugins/zfs_zrep_status
 ```
-4. Goto your Check_mk webinterface. Choose WATO -> Host & Service Parameters. Search for zrep.
+4. Goto your Check_mk webinterface. Choose WATO -> Host & Service Parameters. Search for *zrep*.
 
 ## On the Server which holds the ZREP initialzied ZFS datasets (NOT THE CHECK_MK SERVER!):
 1. Copy the plugin script [check_mk/agents/plugins/zfs_zrep_status](check_mk/agents/plugins/zfs_zrep_status) into /usr/lib/check_mk_agent/plugins/
