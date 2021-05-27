@@ -82,7 +82,7 @@ def check_zfs_zrep_status(item, params, info):
 check_info["zfs_zrep_status"] = {
     'check_function':            check_zfs_zrep_status,
     'inventory_function':        inventory_zfs_zrep_status,
-    'service_description':       'ZREP status',
+    'service_description':       'ZREP status %s',
     'group':                     'zfs',
     'has_perfdata':              True,
 }
