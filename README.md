@@ -1,4 +1,4 @@
-# [Check MK](https://mathias-kettner.de/check_mk.html) Plugin to check [ZREP](http://www.bolthole.com/solaris/zrep/) status
+# [Check MK](https://checkmk.com) Plugin to check [ZREP](http://www.bolthole.com/solaris/zrep/) status
 
 # Installation
 First install ZREP as described on ZREP-Website: [http://www.bolthole.com/solaris/zrep/](http://www.bolthole.com/solaris/zrep/)
@@ -10,12 +10,13 @@ zrep init ....
 ```
 
 ## On the Monitoring Server where Check_mk is installed:
-For a detailed description how to work with mkp's goto [https://mathias-kettner.de/cms_mkps.html](https://mathias-kettner.de/cms_mkps.html).
+For a detailed description how to work with mkp's goto [https://docs.checkmk.com/latest/de/mkps.html](https://docs.checkmk.com/latest/de/mkps.html).
 
 ### Short tasks
-1. copy the zfs_zrep_status*.mkp (see [dist](dist) folder) to your Check_mk server into the /tmp folder.
-2. mkp install /tmp/zfs_zrep_status*.mkp
-3. Check if installation worked
+1. copy the XXXXXX.mkp (see [dist](dist) folder) to your Check_mk server into the /tmp folder.
+2. su - <SITE_NAME> (mkp has to be installed on every site you are running!)
+3. mkp install /tmp/XXXXXX.mkp (replace XXXXXX with the filename downloaded)
+4. Check if installation worked
 ```
 root@monitoring01:/opt/omd# find . -name '*zfs_zrep_status*'
 ./sites/XXXX/local/share/check_mk/checks/zfs_zrep_status
@@ -23,7 +24,7 @@ root@monitoring01:/opt/omd# find . -name '*zfs_zrep_status*'
 ./sites/XXXX/local/share/check_mk/web/plugins/wato/check_parameters_zfs_zrep_status.py
 ./sites/XXXX/local/share/check_mk/agents/plugins/zfs_zrep_status
 ```
-4. Goto your Check_mk webinterface. Choose WATO -> Host & Service Parameters. Search for *zrep*.
+5. Goto your Check_mk webinterface. Open "Service Rules" and search for zrep.
 
 ## On the Server which holds the ZREP initialzied ZFS datasets (NOT THE CHECK_MK SERVER!):
 1. Copy the plugin script [check_mk/agents/plugins/zfs_zrep_status](check_mk/agents/plugins/zfs_zrep_status) into /usr/lib/check_mk_agent/plugins/

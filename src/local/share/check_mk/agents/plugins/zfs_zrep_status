@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Author: Matthias Maderer
+# E-Mail: edvler@edvler-blog.de
+# URL: https://github.com/edvler/check_mk_proxmox-qemu-backup
+# License: GPLv2
+
+ZREP_BINARY=zrep
+
+if ! command -v zfs >/dev/null 2>&1
+then
+    exit 0
+fi
+
+if ! command -v zrep >/dev/null 2>&1
+then
+    exit 0
+fi
+
+
+#get all zrep tags
+zrep_tags=( $(zfs get all -t filesystem,volume | grep dest-fs | awk '{print $2}' | sed s/:dest-fs//gi | sort | uniq) )
+
+if [ ${#zrep_tags[@]} -gt 0 ]; then
+        echo '<<<zfs_zrep_status>>>'
+fi
+
+#for each tag output status
+for tag in "${zrep_tags[@]}"; do
+        export ZREPTAG=$tag
+        $ZREP_BINARY status | sed -e 's/$/ '"$ZREPTAG"'/'
+done
+

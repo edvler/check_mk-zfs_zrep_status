@@ -1,0 +1,34 @@
+title: Plugin to check the status of the ZREP tool for ZFS dataset synchronisation
+agents: linux
+author: Matthias Maderer <matthias.maderer@web.de>
+license: GPLv2
+distribution: check_mk
+description:
+ This check runs on distributions which support the ZFS filesystem
+ and has the ZREP tool installed.
+
+ It querys the status with -zrep status- and parses the output.
+ For each ZREP intialized ZFS dataset is one service created.
+
+ The default is that the service gets {critical} if the synchronisation is
+ older than 30 hours. It gets {warning} if the synchronisation is older than 26 hours.
+ 
+ The {critical} and {warning} limits can be configured in WATO.
+ The check can also be disabled for a ZFS dataset.
+ Goto WATO - Host & Service Parameters. Search for zrep.
+
+ The check needs a ZREP intialzied ZFS dataset.
+ To initialize a ZFS dataset with ZREP please go to:
+ http://www.bolthole.com/solaris/zrep/
+
+ Newly synchronized ZFS datasets are displayed as new service by the check_mk
+ inventory check.
+
+ {Installation:}
+ https://github.com/edvler/check_mk-zfs_zrep_status/README.md
+ 
+ Check https://github.com/edvler/check_mk-zfs_zrep_status
+ for more informations.
+
+inventory:
+ One service will be created for each ZREP intialized ZFS dataset.
