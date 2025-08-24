@@ -4,9 +4,6 @@
 # URL: https://github.com/edvler/check_mk-zfs_zrep_status
 # License: GPLv2
 
-#example: \lib\python3\cmk\gui\plugins\wato\check_parameters\memory.py
-
-
 from cmk.rulesets.v1 import Title, Help
 from cmk.rulesets.v1.form_specs import (
     DefaultValue,

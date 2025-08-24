@@ -5,35 +5,13 @@
 # URL: https://github.com/edvler/check_mk-zfs_zrep_status
 # License: GPLv2
 
-#Example output of agent with zrep version < 1.8.0
-#
-#root@pve01:/usr/lib/check_mk_agent/plugins# ./zfs_zrep_status
-#<<<zfs_zrep_status>>>
-#b01/offs                                       last synced 2019/12/25-19:32:03 zrep-c01
-
-
-#Example output of agent with zrep version >= 1.8.0
-#
-#root@pve01:/usr/lib/check_mk_agent/plugins# ./zfs_zrep_status
-#<<<zfs_zrep_status>>>
-#backup02/offsite                                     last: 2019/12/24-14:54:54 zrep-b02-ext01
-
-
 from cmk.agent_based.v2 import (
-    AgentSection,
     CheckPlugin,
-    CheckResult,
-    DiscoveryResult,
-    Result,
     Service,
-    State,
-    Metric,
     render,
     check_levels,
 )
 import time
-
-
 
 def params_parser(params):
     params_new = {}
@@ -81,8 +59,6 @@ def check_zfs_zrep_status(item, params, section):
 
             old = time.time() - time.mktime(synctime)
 
-            #infotext = 'last synchronized: ' + time.strftime("%Y-%m-%d %H:%M", synctime) + ' (' + render.timespan(old) + ' ago)'
-
             yield from check_levels(
                 old,
                 levels_upper=params_cmk_24['backup_age'],
@@ -91,22 +67,6 @@ def check_zfs_zrep_status(item, params, section):
                 render_func=lambda x: render.timespan(x),
                 boundaries=(0,None)
             )
-
-            #if 'backup_age' not in params_cmk_24:
-            #    yield (Result(state=State.UNKNOWN, summary="No backup_age defined, but - Use levels defined in this check - are choosen in rules!"))
-            #    return
-
-            #warn, crit = params_cmk_24['backup_age'][1]
-            #yield Metric("backup_age", old, levels = (warn, crit))
-#
-#            if old < warn:
-#                yield Result(state=State.OK, summary=infotext)
-#            elif old < crit:
-#                yield Result(state=State.WARN, summary=infotext)
-#            else:
-#                yield Result(state=State.CRIT, summary=infotext)
-
-
 
 
 check_plugin_zfs_zrep_status = CheckPlugin(
@@ -119,3 +79,17 @@ check_plugin_zfs_zrep_status = CheckPlugin(
                                 },
     check_ruleset_name = "zfs"
 )
+
+
+#Example output of agent with zrep version < 1.8.0
+#
+#root@pve01:/usr/lib/check_mk_agent/plugins# ./zfs_zrep_status
+#<<<zfs_zrep_status>>>
+#b01/offs                                       last synced 2019/12/25-19:32:03 zrep-c01
+
+
+#Example output of agent with zrep version >= 1.8.0
+#
+#root@pve01:/usr/lib/check_mk_agent/plugins# ./zfs_zrep_status
+#<<<zfs_zrep_status>>>
+#backup02/offsite                                     last: 2019/12/24-14:54:54 zrep-b02-ext01
