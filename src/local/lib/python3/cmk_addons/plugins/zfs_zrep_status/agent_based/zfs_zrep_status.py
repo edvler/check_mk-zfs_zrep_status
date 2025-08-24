@@ -115,7 +115,7 @@ check_plugin_zfs_zrep_status = CheckPlugin(
     discovery_function = inventory_zfs_zrep_status,
     check_function = check_zfs_zrep_status,
     check_default_parameters = {
-                                'backup_age': (1.5 * 86400.0, 2 * 86400.0),
+                                'backup_age': ('fixed', (1.5 * 86400.0, 2 * 86400.0)),
                                 },
     check_ruleset_name = "zfs"
 )
